@@ -3,10 +3,9 @@ import axios from "axios";
 
 //Components
 import CategoryItem from "../category-item/category-item";
-import { CategoriesContainer, CategoriesContent } from "./categories.style";
 
 // Styles
-import "./categories.styles.css";
+import { CategoriesContainer, CategoriesContent } from "./categories.style";
 
 // Utilities
 import Category from "../../types/category.types";
