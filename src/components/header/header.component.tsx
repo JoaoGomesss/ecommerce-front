@@ -8,7 +8,6 @@ import {
   HeaderTitle,
 } from "./header.styles";
 import { Link } from "react-router-dom";
-import LoginPage from "../../pages/login/login.page";
 import Colors from "../../theme/theme.colors";
 
 const Header = () => {
