@@ -4,6 +4,7 @@ import { FiLogIn } from "react-icons/fi";
 // Components
 import CustomButton from "../../components/custom-button/custom.button.component";
 import Header from "../../components/header/header.component";
+import CustomInput from "../../components/custom-input/custom.input.component";
 
 // Styles
 import {
@@ -13,7 +14,6 @@ import {
   LoginInputContainer,
   LoginSubtitle,
 } from "./login.styles";
-import CustomInput from "../../components/custom-input/custom.component";
 
 const LoginPage = () => {
   return (

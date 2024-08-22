@@ -1,7 +1,7 @@
 import { FunctionComponent, InputHTMLAttributes } from "react";
 
 // Styles
-import { CustomInputContainer } from "./custom.input.component.style";
+import { CustomInputContainer } from "./custom.input.style";
 
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;
