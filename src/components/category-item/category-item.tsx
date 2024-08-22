@@ -5,6 +5,7 @@ import Category from "../../types/category.types";
 
 // Styles
 import "./category-item-style.css";
+import { CategoryItemContainer, CategoryName } from "./category.style";
 
 interface CategoryItemProps {
   category: Category;
@@ -12,14 +13,12 @@ interface CategoryItemProps {
 
 const CategoryItem: FunctionComponent<CategoryItemProps> = ({ category }) => {
   return (
-    <div
-      className="category-item-container"
-      style={{ backgroundImage: `url('${category.imageUrl}')` }}
-    >
-      <div className="category-name">
+    <CategoryItemContainer backgroundImage={category.imageUrl}>
+      <CategoryName>
         <p>{category.displayName}</p>
-      </div>
-    </div>
+        <p>Explorar</p>
+      </CategoryName>
+    </CategoryItemContainer>
   );
 };
 
