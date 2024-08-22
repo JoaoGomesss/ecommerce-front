@@ -7,15 +7,23 @@ import {
   HeaderItems,
   HeaderTitle,
 } from "./header.styles";
+import { Link } from "react-router-dom";
+import LoginPage from "../../pages/login/login.page";
+import Colors from "../../theme/theme.colors";
 
 const Header = () => {
   return (
     <HeaderContainer>
-      <HeaderTitle>COMPLÊ CLOTHING</HeaderTitle>
+      <HeaderTitle>COSMO APPAREL</HeaderTitle>
 
       <HeaderItems>
         <HeaderItem>Explorar</HeaderItem>
-        <HeaderItem>Login</HeaderItem>
+        <Link
+          to="/login"
+          style={{ textDecoration: "none", color: `${Colors.text.white} ` }}
+        >
+          <HeaderItem>Login</HeaderItem>
+        </Link>
         <HeaderItem>Criar conta</HeaderItem>
         <HeaderItem>
           <BsCart3 size={25} /> <p style={{ marginLeft: 5 }}> 5</p>
