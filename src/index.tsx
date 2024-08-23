@@ -3,9 +3,12 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
+// Components
 import App from "./App";
 import LoginPage from "./pages/login/login.page";
+import SignUpPage from "./pages/sign-up/sign.up.page";
 
+// Style
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -16,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/signup",
+    element: <SignUpPage />,
   },
 ]);
 

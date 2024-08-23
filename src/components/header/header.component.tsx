@@ -23,7 +23,12 @@ const Header = () => {
         >
           <HeaderItem>Login</HeaderItem>
         </Link>
-        <HeaderItem>Criar conta</HeaderItem>
+        <Link
+          to="/signup"
+          style={{ textDecoration: "none", color: `${Colors.text.white} ` }}
+        >
+          <HeaderItem>Criar conta</HeaderItem>
+        </Link>
         <HeaderItem>
           <BsCart3 size={25} /> <p style={{ marginLeft: 5 }}> 5</p>
         </HeaderItem>
