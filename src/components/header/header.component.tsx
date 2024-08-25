@@ -13,7 +13,12 @@ import Colors from "../../theme/theme.colors";
 const Header = () => {
   return (
     <HeaderContainer>
-      <HeaderTitle>COSMO APPAREL</HeaderTitle>
+      <Link
+        to="/"
+        style={{ textDecoration: "none", color: `${Colors.text.white} ` }}
+      >
+        <HeaderTitle>COSMO APPAREL</HeaderTitle>
+      </Link>
 
       <HeaderItems>
         <HeaderItem>Explorar</HeaderItem>
