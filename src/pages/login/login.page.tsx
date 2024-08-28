@@ -10,13 +10,14 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // Components
 import CustomButton from "../../components/custom-button/custom.button.component";
 import Header from "../../components/header/header.component";
 import CustomInput from "../../components/custom-input/custom.input.component";
 import InputErrorMessage from "../../components/input-error-message/input.error.message";
+import Loading from "../../components/loading/loading.component";
 
 // Styles
 import {
@@ -44,6 +45,8 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<LoginForm>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const { isAuthenticated } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -55,6 +58,7 @@ const LoginPage = () => {
 
   const handleSubmitPress = async (data: LoginForm) => {
     try {
+      setIsLoading(true);
       const userCredentials = await signInWithEmailAndPassword(
         auth,
         data.email,
@@ -70,11 +74,14 @@ const LoginPage = () => {
       if (_error.code === AuthErrorCodes.USER_DELETED) {
         return setError("email", { type: "userNotFound" });
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSignInWithGooglePress = async () => {
     try {
+      setIsLoading(true);
       const userCredentials = await signInWithPopup(auth, googleProvider);
 
       const querySnapchot = await getDocs(
@@ -99,13 +106,15 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
       <Header />
-
+      {isLoading && <Loading />}
       <LoginContainer>
         <LoginContent>
           <LoginHeadline>Entre com a sua conta</LoginHeadline>
