@@ -36,7 +36,7 @@ const App: FunctionComponent = () => {
       );
 
       const userFromFirestore = querySnapchot.docs[0]?.data();
-      loginUser(userFromFirestore as any);
+      loginUser(userFromFirestore);
       return setIsInitializing(false);
     }
 
