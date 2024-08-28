@@ -7,6 +7,8 @@ import {
   AuthErrorCodes,
 } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import CustomButton from "../../components/custom-button/custom.button.component";
@@ -24,6 +26,7 @@ import {
 
 //Utilities
 import { auth, db } from "../../config/firebase.config";
+import { UserContext } from "../../contexts/user.context";
 interface SignUpForm {
   firstName: string;
   lastName: string;
@@ -40,6 +43,16 @@ const SignUpPage = () => {
     setError,
     formState: { errors },
   } = useForm<SignUpForm>();
+
+  const { isAuthenticated } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated]);
 
   const handleSubmitPress = async (data: SignUpForm) => {
     try {
