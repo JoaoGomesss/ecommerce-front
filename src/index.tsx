@@ -5,14 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import UserContextProvider from "./contexts/user.context";
-import CategorieContextProvider from "./contexts/categories.context";
+import CategoryContextProvider from "./contexts/categories.context";
 
 ReactDOM.render(
   <React.StrictMode>
     <UserContextProvider>
-      <CategorieContextProvider>
+      <CategoryContextProvider>
         <App />
-      </CategorieContextProvider>
+      </CategoryContextProvider>
     </UserContextProvider>
   </React.StrictMode>,
   document.getElementById("root"),

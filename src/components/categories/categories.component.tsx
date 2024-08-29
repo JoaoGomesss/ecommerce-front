@@ -8,11 +8,11 @@ import Loading from "../loading/loading.component";
 import { CategoriesContainer, CategoriesContent } from "./categories.style";
 
 // Utilities
-import { CategorieContext } from "../../contexts/categories.context";
+import { CategoryContext } from "../../contexts/categories.context";
 
 const Categories = () => {
   const { categories, isLoading, fetchCategories } =
-    useContext(CategorieContext);
+    useContext(CategoryContext);
 
   useEffect(() => {
     fetchCategories();

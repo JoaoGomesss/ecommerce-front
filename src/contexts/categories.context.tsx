@@ -6,7 +6,7 @@ import { db } from "../config/firebase.config";
 import { categoryConverter } from "../converters/firestore.converter";
 import Category from "../types/category.types";
 
-interface ICategorieContext {
+interface ICategoryContext {
   categories: Category[];
   fetchCategories: () => Promise<void>;
   isLoading: boolean;
@@ -16,13 +16,13 @@ interface CategoriesContextProviderProps {
   children: ReactNode;
 }
 
-export const CategorieContext = createContext<ICategorieContext>({
+export const CategoryContext = createContext<ICategoryContext>({
   categories: [],
   fetchCategories: () => Promise.resolve(),
   isLoading: false,
 });
 
-const CategorieContextProvider: FunctionComponent<
+const CategoryContextProvider: FunctionComponent<
   CategoriesContextProviderProps
 > = ({ children }) => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -51,12 +51,12 @@ const CategorieContextProvider: FunctionComponent<
   };
 
   return (
-    <CategorieContext.Provider
+    <CategoryContext.Provider
       value={{ categories, fetchCategories, isLoading }}
     >
       {children}
-    </CategorieContext.Provider>
+    </CategoryContext.Provider>
   );
 };
 
-export default CategorieContextProvider;
+export default CategoryContextProvider;
