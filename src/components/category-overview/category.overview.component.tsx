@@ -6,7 +6,11 @@ import {
   ProductsContainer,
 } from "./category.overview.style";
 
+// Utilities
 import Category from "../../types/category.types";
+
+// Components
+import ProductItem from "../product-item/product.item.component";
 
 interface CategoryOverviewProps {
   category: Category;
@@ -18,7 +22,11 @@ const CategoryOverview: FunctionComponent<CategoryOverviewProps> = ({
   return (
     <CategoryContainer>
       <CategoryTitle>{category.displayName}</CategoryTitle>
-      <ProductsContainer></ProductsContainer>
+      <ProductsContainer>
+        {category.products.slice(0, 4).map((product) => (
+          <ProductItem key={product.id} product={product} />
+        ))}
+      </ProductsContainer>
     </CategoryContainer>
   );
 };
