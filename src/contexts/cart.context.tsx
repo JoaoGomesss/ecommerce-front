@@ -13,6 +13,7 @@ import Products from "../types/products.types";
 interface ICartContext {
   isVisible: boolean;
   productsTotalPrice: number;
+  productsCount: number;
   toggleCart: () => void;
   addProductToCart: (product: Products) => void;
   removeProductFromCart: (productId: string) => void;
@@ -28,6 +29,7 @@ interface ICartContextProps {
 export const CartContext = createContext<ICartContext>({
   isVisible: false,
   productsTotalPrice: 0,
+  productsCount: 0,
   toggleCart: () => {},
   addProductToCart: () => {},
   removeProductFromCart: () => {},
@@ -51,6 +53,12 @@ const CartContextProvider: FunctionComponent<ICartContextProps> = ({
   const toggleCart = () => {
     setIsVisible((prevState) => !prevState);
   };
+
+  const productsCount = useMemo(() => {
+    return products.reduce((acc, currentProduct) => {
+      return acc + currentProduct.quantity;
+    }, 0);
+  }, [products]);
 
   const addProductToCart = (product: Products) => {
     const productIsAlreadyInCart = products.some(
@@ -103,12 +111,13 @@ const CartContextProvider: FunctionComponent<ICartContextProps> = ({
       value={{
         isVisible,
         products,
+        productsTotalPrice,
+        productsCount,
         toggleCart,
         addProductToCart,
         removeProductFromCart,
         decreaseProductQuantity,
         increaseProductQuantity,
-        productsTotalPrice,
       }}
     >
       {children}
