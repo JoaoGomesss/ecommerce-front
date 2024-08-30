@@ -2,6 +2,7 @@ import {
   createContext,
   FunctionComponent,
   ReactNode,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -43,6 +44,18 @@ const CartContextProvider: FunctionComponent<ICartContextProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [products, setProducts] = useState<CartProduct[]>([]);
+
+  useEffect(() => {
+    const productsFromLocalStorage = JSON.parse(
+      localStorage.getItem("cartProducts")!,
+    );
+
+    setProducts(productsFromLocalStorage);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cartProducts", JSON.stringify(products));
+  }, [products]);
 
   const productsTotalPrice = useMemo(() => {
     return products.reduce((acc, currentProduct) => {
