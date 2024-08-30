@@ -19,10 +19,20 @@ interface CartItemProps {
 }
 
 const CartItem: FunctionComponent<CartItemProps> = ({ product }) => {
-  const { removeProductFromCart } = useContext(CartContext);
+  const {
+    removeProductFromCart,
+    decreaseProductQuantity,
+    increaseProductQuantity,
+  } = useContext(CartContext);
 
   const handleRemoveItemClick = () => {
     removeProductFromCart(product.id);
+  };
+  const handleIncreaseItemClick = () => {
+    increaseProductQuantity(product.id);
+  };
+  const handleDecreaseItemClick = () => {
+    decreaseProductQuantity(product.id);
   };
 
   return (
@@ -33,9 +43,9 @@ const CartItem: FunctionComponent<CartItemProps> = ({ product }) => {
         <p>R${product.price}</p>
 
         <CartItemQuantity>
-          <AiOutlineMinus size={20} />
+          <AiOutlineMinus size={20} onClick={handleDecreaseItemClick} />
           <p>{product.quantity}</p>
-          <AiOutlinePlus size={20} />
+          <AiOutlinePlus size={20} onClick={handleIncreaseItemClick} />
         </CartItemQuantity>
       </CartItemInfo>
       <RemoveButton onClick={handleRemoveItemClick}>
