@@ -1,0 +1,38 @@
+import { FunctionComponent, useContext } from "react";
+import { BsCartCheck } from "react-icons/bs";
+
+// Style
+import {
+  CartContainer,
+  CartContent,
+  CartEscapeArea,
+  CartTitle,
+  CartTotal,
+} from "./cart.style";
+
+// Component
+import CustomButton from "../custom-button/custom.button.component";
+
+// Utilities
+import { CartContext } from "../../contexts/cart.context";
+
+const Cart: FunctionComponent = () => {
+  const { isVisible, toggleCart } = useContext(CartContext);
+
+  return (
+    <CartContainer isVisible={isVisible}>
+      <CartEscapeArea onClick={toggleCart} />
+      <CartContent>
+        <CartTitle>Seu Carrinho</CartTitle>
+
+        {/*produtos*/}
+        <CartTotal>Total: R$ 119</CartTotal>
+        <CustomButton loginIcon={<BsCartCheck />}>
+          Ir para o Check Out
+        </CustomButton>
+      </CartContent>
+    </CartContainer>
+  );
+};
+
+export default Cart;
