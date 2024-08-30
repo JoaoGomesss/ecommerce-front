@@ -1,4 +1,10 @@
-import { createContext, FunctionComponent, ReactNode, useState } from "react";
+import {
+  createContext,
+  FunctionComponent,
+  ReactNode,
+  useMemo,
+  useState,
+} from "react";
 
 // Utilities
 import CartProduct from "../types/cart.types";
@@ -6,6 +12,7 @@ import Products from "../types/products.types";
 
 interface ICartContext {
   isVisible: boolean;
+  productsTotalPrice: number;
   toggleCart: () => void;
   addProductToCart: (product: Products) => void;
   removeProductFromCart: (productId: string) => void;
@@ -20,6 +27,7 @@ interface ICartContextProps {
 
 export const CartContext = createContext<ICartContext>({
   isVisible: false,
+  productsTotalPrice: 0,
   toggleCart: () => {},
   addProductToCart: () => {},
   removeProductFromCart: () => {},
@@ -33,6 +41,12 @@ const CartContextProvider: FunctionComponent<ICartContextProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [products, setProducts] = useState<CartProduct[]>([]);
+
+  const productsTotalPrice = useMemo(() => {
+    return products.reduce((acc, currentProduct) => {
+      return acc + currentProduct.price * currentProduct.quantity;
+    }, 0);
+  }, [products]);
 
   const toggleCart = () => {
     setIsVisible((prevState) => !prevState);
@@ -94,6 +108,7 @@ const CartContextProvider: FunctionComponent<ICartContextProps> = ({
         removeProductFromCart,
         decreaseProductQuantity,
         increaseProductQuantity,
+        productsTotalPrice,
       }}
     >
       {children}
