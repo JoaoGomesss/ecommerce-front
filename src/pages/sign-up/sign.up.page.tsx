@@ -194,7 +194,7 @@ const SignUpPage = () => {
             )}
           </SignUpInputContainer>
           <CustomButton
-            loginIcon={<FiLogIn size={18} />}
+            startIcon={<FiLogIn size={18} />}
             onClick={() => handleSubmit(handleSubmitPress)()}
           >
             Criar sua conta

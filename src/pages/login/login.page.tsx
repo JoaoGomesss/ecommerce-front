@@ -120,7 +120,7 @@ const LoginPage = () => {
           <LoginHeadline>Entre com a sua conta</LoginHeadline>
 
           <CustomButton
-            loginIcon={<BsGoogle size={18} />}
+            startIcon={<BsGoogle size={18} />}
             onClick={handleSignInWithGooglePress}
           >
             Entrar com o Google
@@ -168,7 +168,7 @@ const LoginPage = () => {
           </LoginInputContainer>
 
           <CustomButton
-            loginIcon={<FiLogIn size={18} />}
+            startIcon={<FiLogIn size={18} />}
             onClick={() => handleSubmit(handleSubmitPress)()}
           >
             Entrar
