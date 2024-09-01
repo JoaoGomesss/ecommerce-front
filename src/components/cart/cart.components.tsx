@@ -1,5 +1,6 @@
 import { FunctionComponent, useContext } from "react";
 import { BsCartCheck } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 // Style
 import {
@@ -16,7 +17,6 @@ import CartItem from "../cart-item/cart.item.component";
 
 // Utilities
 import { CartContext } from "../../contexts/cart.context";
-import { useNavigate } from "react-router-dom";
 
 const Cart: FunctionComponent = () => {
   const { isVisible, products, toggleCart, productsTotalPrice, productsCount } =
