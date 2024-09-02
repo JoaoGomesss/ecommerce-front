@@ -20,6 +20,7 @@ import { userConverter } from "./converters/firestore.converter";
 import Loading from "./components/loading/loading.component";
 import Cart from "./components/cart/cart.components";
 import AuthenticationGuard from "./guards/authentication.guard";
+import PaymentConfirmationPage from "./pages/payment-confirmation/payment.confirmation.page";
 
 const App: FunctionComponent = () => {
   const [isInitializing, setIsInitializing] = useState(true);
@@ -66,6 +67,10 @@ const App: FunctionComponent = () => {
               <CheckOutPage />
             </AuthenticationGuard>
           }
+        />
+        <Route
+          path="/payment-confirmation"
+          element={<PaymentConfirmationPage />}
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
