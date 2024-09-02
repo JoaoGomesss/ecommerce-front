@@ -15,6 +15,7 @@ import {
 
 // Utilities
 import { CartContext } from "../../contexts/cart.context";
+import { logoutUser } from "../../store/reducers/user/user.action";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Header = () => {
   };
 
   const handleSignOutClick = () => {
-    dispatch({ type: "LOGOUT_USER" });
+    dispatch(logoutUser());
     signOut(auth);
   };
 

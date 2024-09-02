@@ -1,8 +1,9 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { FunctionComponent, useContext, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getDocs, query, collection, where } from "firebase/firestore";
-import { useDispatch, UseSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 // Pages
 import HomePage from "./pages/home/home.page";
@@ -15,13 +16,13 @@ import CheckOutPage from "./pages/checkout/checkout.page";
 // Utilities
 import { auth, db } from "./config/firebase.config";
 import { userConverter } from "./converters/firestore.converter";
+import { loginUser, logoutUser } from "./store/reducers/user/user.action";
 
 // Components
 import Loading from "./components/loading/loading.component";
 import Cart from "./components/cart/cart.components";
 import AuthenticationGuard from "./guards/authentication.guard";
 import PaymentConfirmationPage from "./pages/payment-confirmation/payment.confirmation.page";
-import { useSelector } from "react-redux";
 
 const App: FunctionComponent = () => {
   const [isInitializing, setIsInitializing] = useState(true);
@@ -36,7 +37,7 @@ const App: FunctionComponent = () => {
     onAuthStateChanged(auth, async (user) => {
       const isSignOut = isAuthenticated && !user;
       if (isSignOut) {
-        dispatch({ type: "LOGOUT_USER" });
+        dispatch(logoutUser());
         return setIsInitializing(false);
       }
 
@@ -52,7 +53,7 @@ const App: FunctionComponent = () => {
 
         const userFromFirestore = querySnapchot.docs[0]?.data();
 
-        dispatch({ type: "LOGIN_USER", payload: userFromFirestore });
+        dispatch(loginUser(userFromFirestore));
         return setIsInitializing(false);
       }
 
