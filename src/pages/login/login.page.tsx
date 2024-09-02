@@ -10,7 +10,8 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 // Components
 import CustomButton from "../../components/custom-button/custom.button.component";
@@ -30,7 +31,6 @@ import {
 
 //Utilities
 import { auth, db, googleProvider } from "../../config/firebase.config";
-import { UserContext } from "../../contexts/user.context";
 
 interface LoginForm {
   email: string;
@@ -47,7 +47,9 @@ const LoginPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isAuthenticated } = useContext(UserContext);
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer,
+  );
 
   const navigate = useNavigate();
   useEffect(() => {

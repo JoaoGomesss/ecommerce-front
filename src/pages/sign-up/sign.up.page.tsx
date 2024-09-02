@@ -7,8 +7,9 @@ import {
   AuthErrorCodes,
 } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // Components
 import CustomButton from "../../components/custom-button/custom.button.component";
@@ -27,7 +28,6 @@ import {
 
 //Utilities
 import { auth, db } from "../../config/firebase.config";
-import { UserContext } from "../../contexts/user.context";
 interface SignUpForm {
   firstName: string;
   lastName: string;
@@ -47,7 +47,9 @@ const SignUpPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isAuthenticated } = useContext(UserContext);
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer,
+  );
 
   const navigate = useNavigate();
 

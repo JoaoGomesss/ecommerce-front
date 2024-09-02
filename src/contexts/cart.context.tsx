@@ -44,7 +44,7 @@ export const CartContext = createContext<ICartContext>({
 const CartContextProvider: FunctionComponent<ICartContextProps> = ({
   children,
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setisVisible] = useState(false);
   const [products, setProducts] = useState<CartProduct[]>([]);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const CartContextProvider: FunctionComponent<ICartContextProps> = ({
   }, [products]);
 
   const toggleCart = () => {
-    setIsVisible((prevState) => !prevState);
+    setisVisible((prevState) => !prevState);
   };
 
   const productsCount = useMemo(() => {

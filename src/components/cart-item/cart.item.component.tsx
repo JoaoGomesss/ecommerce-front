@@ -37,7 +37,7 @@ const CartItem: FunctionComponent<CartItemProps> = ({ product }) => {
 
   return (
     <CartItemContainer>
-      <CartItemImage imageUrl={product.imageUrl} />
+      <CartItemImage $imageUrl={product.imageUrl} />
       <CartItemInfo>
         <p>{product.name}</p>
         <p>R${product.price}</p>

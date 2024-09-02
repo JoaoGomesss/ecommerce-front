@@ -1,7 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { FunctionComponent, useContext, useState } from "react";
+import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getDocs, query, collection, where } from "firebase/firestore";
+import { useDispatch, UseSelector } from "react-redux";
 
 // Pages
 import HomePage from "./pages/home/home.page";
@@ -13,7 +14,6 @@ import CheckOutPage from "./pages/checkout/checkout.page";
 
 // Utilities
 import { auth, db } from "./config/firebase.config";
-import { UserContext } from "./contexts/user.context";
 import { userConverter } from "./converters/firestore.converter";
 
 // Components
@@ -21,36 +21,44 @@ import Loading from "./components/loading/loading.component";
 import Cart from "./components/cart/cart.components";
 import AuthenticationGuard from "./guards/authentication.guard";
 import PaymentConfirmationPage from "./pages/payment-confirmation/payment.confirmation.page";
+import { useSelector } from "react-redux";
 
 const App: FunctionComponent = () => {
   const [isInitializing, setIsInitializing] = useState(true);
 
-  const { isAuthenticated, loginUser, logoutUser } = useContext(UserContext);
+  const dispatch = useDispatch();
 
-  onAuthStateChanged(auth, async (user) => {
-    const isSignOut = isAuthenticated && !user;
-    if (isSignOut) {
-      logoutUser();
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer,
+  );
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      const isSignOut = isAuthenticated && !user;
+      if (isSignOut) {
+        dispatch({ type: "LOGOUT_USER" });
+        return setIsInitializing(false);
+      }
+
+      const isSignIn = !isAuthenticated && user;
+
+      if (isSignIn) {
+        const querySnapchot = await getDocs(
+          query(
+            collection(db, "users").withConverter(userConverter),
+            where("id", "==", user.uid),
+          ),
+        );
+
+        const userFromFirestore = querySnapchot.docs[0]?.data();
+
+        dispatch({ type: "LOGIN_USER", payload: userFromFirestore });
+        return setIsInitializing(false);
+      }
+
       return setIsInitializing(false);
-    }
-
-    const isSignIn = !isAuthenticated && user;
-
-    if (isSignIn) {
-      const querySnapchot = await getDocs(
-        query(
-          collection(db, "users").withConverter(userConverter),
-          where("id", "==", user.uid),
-        ),
-      );
-
-      const userFromFirestore = querySnapchot.docs[0]?.data();
-      loginUser(userFromFirestore);
-      return setIsInitializing(false);
-    }
-
-    return setIsInitializing(false);
-  });
+    });
+  }, [dispatch]);
 
   if (isInitializing) return <Loading />;
 

@@ -17,7 +17,7 @@ const CategoryItem: FunctionComponent<CategoryItemProps> = ({ category }) => {
     navigate(`/category/${category.id}`);
   };
   return (
-    <CategoryItemContainer backgroundimage={category.imageUrl}>
+    <CategoryItemContainer $backgroundimage={category.imageUrl}>
       <CategoryName onClick={handleExploreClick}>
         <p>{category.displayName}</p>
         <p>Explorar</p>
