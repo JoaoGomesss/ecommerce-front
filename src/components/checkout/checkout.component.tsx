@@ -1,6 +1,5 @@
-import { FunctionComponent, useContext, useState } from "react";
-import { CartContext } from "../../contexts/cart.context";
-
+import { FunctionComponent, useState } from "react";
+import axios from "axios";
 import { BsBagCheck } from "react-icons/bs";
 
 // Style
@@ -14,11 +13,15 @@ import {
 // Components
 import CustomButton from "../custom-button/custom.button.component";
 import CartItem from "../cart-item/cart.item.component";
-import axios from "axios";
 import Loading from "../loading/loading.component";
 
+// Utilities
+import { useAppSelector } from "../../hooks/redux.hook";
+import { selectProductsTotalPrice } from "../../store/reducers/cart/cart.selector";
+
 const CheckOut: FunctionComponent = () => {
-  const { products, productsTotalPrice } = useContext(CartContext);
+  const { products } = useAppSelector((state) => state.cartReducer);
+  const productsTotalPrice = useAppSelector(selectProductsTotalPrice);
 
   const [isLoading, setIsLoading] = useState(false);
 
