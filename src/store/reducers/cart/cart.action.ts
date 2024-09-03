@@ -5,17 +5,19 @@ interface ToggleCartAction {
   type: typeof CartActionTypes.toggleCart;
 }
 
-export const toggleCart = (): ToggleCartAction => ({ type: "cart/toggle" });
+export const toggleCart = (): ToggleCartAction => ({
+  type: CartActionTypes.toggleCart,
+});
 
 interface AddProductsToCartAction {
-  type: typeof CartActionTypes.toggleCart;
+  type: typeof CartActionTypes.addProductToCart;
   payload: Products;
 }
 
 export const addProductToCart = (
   payload: Products,
 ): AddProductsToCartAction => ({
-  type: typeof CartActionTypes.addProductToCart,
+  type: CartActionTypes.addProductToCart,
   payload,
 });
 

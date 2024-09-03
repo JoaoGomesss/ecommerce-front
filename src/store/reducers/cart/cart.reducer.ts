@@ -1,18 +1,13 @@
-import { act } from "react";
 import CartProduct from "../../../types/cart.types";
 import CartActionTypes from "./cart.actions.types";
 
 interface InitialState {
   isVisible: boolean;
-  productsTotalPrice: number;
-  productsCount: number;
   products: CartProduct[];
 }
 
 const initialState: InitialState = {
   isVisible: false,
-  productsTotalPrice: 0,
-  productsCount: 0,
   products: [],
 };
 

@@ -1,11 +1,9 @@
 import { useDispatch } from "react-redux";
 import { BsCart3 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase.config";
 import { Dispatch } from "redux";
-import { useAppSelector } from "../../hooks/redux.hook";
 
 // Styles
 import {
@@ -16,10 +14,11 @@ import {
 } from "./header.styles";
 
 // Utilities
-import { CartContext } from "../../contexts/cart.context";
 import { logoutUser, UserActions } from "../../store/reducers/user/user.action";
 import { CartActions } from "../../store/reducers/cart/cart.action";
 import { toggleCart } from "../../store/reducers/cart/cart.action";
+import { useAppSelector } from "../../hooks/redux.hook";
+import { selectProductsCount } from "../../store/reducers/cart/cart.selector";
 
 type AppActions = UserActions | CartActions;
 
@@ -32,7 +31,7 @@ const Header = () => {
     (rootReducer) => rootReducer.userReducer,
   );
 
-  const { productsCount } = useContext(CartContext);
+  const productsCount = useAppSelector(selectProductsCount);
 
   const handleLogoClick = () => {
     navigate("/");
