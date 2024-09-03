@@ -28,7 +28,7 @@ interface removeProductFromCartAction {
 export const removeProductFromCart = (
   payload: string,
 ): removeProductFromCartAction => ({
-  type: CartActionTypes.addProductToCart,
+  type: CartActionTypes.removeProductFromCart,
   payload,
 });
 
