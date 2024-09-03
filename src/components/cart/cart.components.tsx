@@ -17,21 +17,32 @@ import CartItem from "../cart-item/cart.item.component";
 
 // Utilities
 import { CartContext } from "../../contexts/cart.context";
+import { useAppSelector } from "../../hooks/redux.hook";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { CartActions, toggleCart } from "../../store/reducers/cart/cart.action";
 
 const Cart: FunctionComponent = () => {
-  const { isVisible, products, toggleCart, productsTotalPrice, productsCount } =
-    useContext(CartContext);
+  const { isVisible, products } = useAppSelector((state) => state.cartReducer);
+
+  const dispatch: Dispatch<CartActions> = useDispatch();
+
+  const { productsTotalPrice, productsCount } = useContext(CartContext);
 
   const navigate = useNavigate();
 
   const handleGoToCheckoutPage = () => {
     navigate("/checkout");
-    toggleCart();
+    dispatch(toggleCart());
+  };
+
+  const handleEscapeAreaClick = () => {
+    dispatch(toggleCart());
   };
 
   return (
     <CartContainer $isVisible={isVisible}>
-      <CartEscapeArea onClick={toggleCart} />
+      <CartEscapeArea onClick={handleEscapeAreaClick} />
       <CartContent>
         <CartTitle>Seu Carrinho</CartTitle>
 
