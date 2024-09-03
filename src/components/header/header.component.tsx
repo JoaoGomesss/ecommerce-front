@@ -15,15 +15,17 @@ import {
 
 // Utilities
 import { CartContext } from "../../contexts/cart.context";
-import { logoutUser } from "../../store/reducers/user/user.action";
+import { logoutUser, UserActions } from "../../store/reducers/user/user.action";
+import { useAppSelector } from "../../hooks/redux.hook";
+import { Dispatch } from "redux";
 
 const Header = () => {
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const dispatch: Dispatch<UserActions> = useDispatch();
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer,
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer,
   );
 
   const { toggleCart, productsCount } = useContext(CartContext);

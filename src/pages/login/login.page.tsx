@@ -31,6 +31,7 @@ import {
 
 //Utilities
 import { auth, db, googleProvider } from "../../config/firebase.config";
+import { useAppSelector } from "../../hooks/redux.hook";
 
 interface LoginForm {
   email: string;
@@ -47,8 +48,8 @@ const LoginPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer,
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer,
   );
 
   const navigate = useNavigate();

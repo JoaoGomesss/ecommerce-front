@@ -3,7 +3,6 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getDocs, query, collection, where } from "firebase/firestore";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 
 // Pages
 import HomePage from "./pages/home/home.page";
@@ -16,21 +15,27 @@ import CheckOutPage from "./pages/checkout/checkout.page";
 // Utilities
 import { auth, db } from "./config/firebase.config";
 import { userConverter } from "./converters/firestore.converter";
-import { loginUser, logoutUser } from "./store/reducers/user/user.action";
+import {
+  loginUser,
+  logoutUser,
+  UserActions,
+} from "./store/reducers/user/user.action";
 
 // Components
 import Loading from "./components/loading/loading.component";
 import Cart from "./components/cart/cart.components";
 import AuthenticationGuard from "./guards/authentication.guard";
 import PaymentConfirmationPage from "./pages/payment-confirmation/payment.confirmation.page";
+import { useAppSelector } from "./hooks/redux.hook";
+import { Dispatch } from "redux";
 
 const App: FunctionComponent = () => {
   const [isInitializing, setIsInitializing] = useState(true);
 
-  const dispatch = useDispatch();
+  const dispatch: Dispatch<UserActions> = useDispatch();
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer,
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer,
   );
 
   useEffect(() => {
