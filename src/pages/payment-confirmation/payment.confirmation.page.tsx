@@ -19,14 +19,10 @@ import CustomButton from "../../components/custom-button/custom.button.component
 
 //Utilities
 import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
-import {
-  CartActions,
-  clearCartProducts,
-} from "../../store/reducers/cart/cart.action";
+import { clearCartProducts } from "../../store/toolkit/cart/cart.slice";
 
 const PaymentConfirmationPage: FunctionComponent = () => {
-  const dispatch: Dispatch<CartActions> = useDispatch();
+  const dispatch = useDispatch();
 
   const [searchParams] = useSearchParams();
 

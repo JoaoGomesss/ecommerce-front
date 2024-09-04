@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
 import { BsCartPlus } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
 
 // Style
 import {
@@ -15,17 +14,14 @@ import CustomButton from "../custom-button/custom.button.component";
 
 //Utilities
 import Products from "../../types/products.types";
-import {
-  addProductToCart,
-  CartActions,
-} from "../../store/reducers/cart/cart.action";
+import { addProductToCart } from "../../store/toolkit/cart/cart.slice";
 
 interface ProducItemProps {
   product: Products;
 }
 
 const ProductItem: FunctionComponent<ProducItemProps> = ({ product }) => {
-  const dispatch: Dispatch<CartActions> = useDispatch();
+  const dispatch = useDispatch();
 
   const handleAddItemToCartClick = () => {
     dispatch(addProductToCart(product));

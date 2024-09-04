@@ -15,11 +15,7 @@ import CheckOutPage from "./pages/checkout/checkout.page";
 // Utilities
 import { auth, db } from "./config/firebase.config";
 import { userConverter } from "./converters/firestore.converter";
-import {
-  loginUser,
-  logoutUser,
-  UserActions,
-} from "./store/reducers/user/user.action";
+import { loginUser, logoutUser } from "./store/toolkit/user/user.slice";
 
 // Components
 import Loading from "./components/loading/loading.component";
@@ -27,12 +23,11 @@ import Cart from "./components/cart/cart.components";
 import AuthenticationGuard from "./guards/authentication.guard";
 import PaymentConfirmationPage from "./pages/payment-confirmation/payment.confirmation.page";
 import { useAppSelector } from "./hooks/redux.hook";
-import { Dispatch } from "redux";
 
 const App: FunctionComponent = () => {
   const [isInitializing, setIsInitializing] = useState(true);
 
-  const dispatch: Dispatch<UserActions> = useDispatch();
+  const dispatch = useDispatch();
 
   const { isAuthenticated } = useAppSelector(
     (rootReducer) => rootReducer.userReducer,

@@ -3,7 +3,6 @@ import { BsCart3 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase.config";
-import { Dispatch } from "redux";
 
 // Styles
 import {
@@ -14,18 +13,15 @@ import {
 } from "./header.styles";
 
 // Utilities
-import { logoutUser, UserActions } from "../../store/reducers/user/user.action";
-import { CartActions } from "../../store/reducers/cart/cart.action";
-import { toggleCart } from "../../store/reducers/cart/cart.action";
+import { logoutUser } from "../../store/toolkit/user/user.slice";
+import { toggleCart } from "../../store/toolkit/cart/cart.slice";
 import { useAppSelector } from "../../hooks/redux.hook";
 import { selectProductsCount } from "../../store/reducers/cart/cart.selector";
-
-type AppActions = UserActions | CartActions;
 
 const Header = () => {
   const navigate = useNavigate();
 
-  const dispatch: Dispatch<AppActions> = useDispatch();
+  const dispatch = useDispatch();
 
   const { isAuthenticated } = useAppSelector(
     (rootReducer) => rootReducer.userReducer,

@@ -13,20 +13,18 @@ import {
 // Utilities
 import CartProduct from "../../types/cart.types";
 import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
 import {
-  CartActions,
   decreaseCartProductQuantity,
   increaseCartProductQuantity,
   removeProductFromCart,
-} from "../../store/reducers/cart/cart.action";
+} from "../../store/toolkit/cart/cart.slice";
 
 interface CartItemProps {
   product: CartProduct;
 }
 
 const CartItem: FunctionComponent<CartItemProps> = ({ product }) => {
-  const dispatch: Dispatch<CartActions> = useDispatch();
+  const dispatch = useDispatch();
 
   const handleRemoveItemClick = () => {
     dispatch(removeProductFromCart(product.id));

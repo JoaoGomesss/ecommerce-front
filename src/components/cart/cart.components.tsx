@@ -18,8 +18,7 @@ import CartItem from "../cart-item/cart.item.component";
 // Utilities
 import { useAppSelector } from "../../hooks/redux.hook";
 import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
-import { CartActions, toggleCart } from "../../store/reducers/cart/cart.action";
+import { toggleCart } from "../../store/toolkit/cart/cart.slice";
 import {
   selectProductsCount,
   selectProductsTotalPrice,
@@ -28,7 +27,7 @@ import {
 const Cart: FunctionComponent = () => {
   const { isVisible, products } = useAppSelector((state) => state.cartReducer);
 
-  const dispatch: Dispatch<CartActions> = useDispatch();
+  const dispatch = useDispatch();
 
   const productsTotalPrice = useAppSelector(selectProductsTotalPrice);
   const productsCount = useAppSelector(selectProductsCount);
