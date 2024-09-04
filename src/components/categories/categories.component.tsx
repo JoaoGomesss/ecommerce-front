@@ -9,8 +9,7 @@ import { CategoriesContainer, CategoriesContent } from "./categories.style";
 
 // Utilities
 import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
-import { fetchCategories } from "../../store/reducers/category/category.actions";
+import { fetchCategories } from "../../store/toolkit/category/category.slice";
 import { useAppSelector } from "../../hooks/redux.hook";
 
 const Categories = () => {
@@ -18,7 +17,7 @@ const Categories = () => {
     (state) => state.categoryReducer,
   );
 
-  const dispatch: Dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCategories() as any);

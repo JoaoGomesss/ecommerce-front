@@ -1,12 +1,11 @@
 import { FunctionComponent, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
 
 // Styles
 import { Container } from "./categories.overview.style";
 
 // Utilities
-import { fetchCategories } from "../../store/reducers/category/category.actions";
+import { fetchCategories } from "../../store/toolkit/category/category.slice";
 import { useAppSelector } from "../../hooks/redux.hook";
 
 // Components
@@ -18,7 +17,7 @@ const CategoriesOverview: FunctionComponent = () => {
     (state) => state.categoryReducer,
   );
 
-  const dispatch: Dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (categories.length === 0) {
