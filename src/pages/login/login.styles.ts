@@ -22,7 +22,7 @@ export const LoginContent = styled.div`
   width: 450px;
 
   @media (max-width: 768px) {
-    width: 90%;
+    width: 85%;
   }
 `;
 
