@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import CustomInput from "./custom.input.component";
 import Colors from "../../theme/theme.colors";
 import userEvent from "@testing-library/user-event";
