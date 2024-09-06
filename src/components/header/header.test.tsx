@@ -1,5 +1,6 @@
 import Header from "./header.component";
 import { renderWithRedux } from "../../helpers/test.helpers";
+import CartProduct from "../../types/cart.types";
 
 jest.mock("firebase/app", () => ({
   initializeApp: jest.fn(),
@@ -32,5 +33,29 @@ describe("Header", () => {
 
     getByText("Login");
     getByText("Criar Conta");
+  });
+
+  it("should show correct cart products count", () => {
+    const products: CartProduct[] = [
+      {
+        id: "1",
+        imageUrl: "image_url",
+        name: "Bóne",
+        price: 10,
+        quantity: 10,
+      },
+      {
+        id: "2",
+        imageUrl: "image_url",
+        name: "Jaqueta",
+        price: 12,
+        quantity: 30,
+      },
+    ];
+    const { getByText } = renderWithRedux(<Header />, {
+      preloadedState: { cartReducer: { products } } as any,
+    });
+
+    getByText("40");
   });
 });
