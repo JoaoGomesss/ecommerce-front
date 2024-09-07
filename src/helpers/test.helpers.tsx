@@ -9,14 +9,14 @@ import { RootState } from "../store/store";
 export const renderWithRedux = (
   component: React.ReactElement,
   {
-    preloadedState,
+    preloadedState = {},
     store = configureStore({
       reducer: rootReducer,
       preloadedState,
     }),
     ...renderOptions
   }: {
-    preloadedState: RootState;
+    preloadedState?: Partial<RootState>;
     store?: any;
   },
 ) => {
