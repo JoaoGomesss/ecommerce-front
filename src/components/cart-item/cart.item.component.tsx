@@ -44,12 +44,23 @@ const CartItem: FunctionComponent<CartItemProps> = ({ product }) => {
         <p>R${product.price}</p>
 
         <CartItemQuantity>
-          <AiOutlineMinus size={20} onClick={handleDecreaseItemClick} />
+          <AiOutlineMinus
+            size={20}
+            onClick={handleDecreaseItemClick}
+            aria-label={`Decrease quantity of ${product.name}`}
+          />
           <p>{product.quantity}</p>
-          <AiOutlinePlus size={20} onClick={handleIncreaseItemClick} />
+          <AiOutlinePlus
+            size={20}
+            onClick={handleIncreaseItemClick}
+            aria-label={`Increase quantity of ${product.name}`}
+          />
         </CartItemQuantity>
       </CartItemInfo>
-      <RemoveButton onClick={handleRemoveItemClick}>
+      <RemoveButton
+        onClick={handleRemoveItemClick}
+        aria-label={`Remove ${product.name}`}
+      >
         <AiOutlineClose size={25} />
       </RemoveButton>
     </CartItemContainer>
