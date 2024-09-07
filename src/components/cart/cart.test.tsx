@@ -69,6 +69,7 @@ describe("Cart", () => {
 
     userEvent.click(increaseButton);
     getByText("3");
+    getByText("Total: R$30");
   });
   it("should decrease product quantity on increase click", () => {
     const { getByLabelText, getByText } = renderWithRedux(<Cart />, {
@@ -91,6 +92,7 @@ describe("Cart", () => {
 
     userEvent.click(decreaseButton);
     getByText("1");
+    getByText("Total: R$10");
   });
 
   it("should remove product on remove click", () => {
