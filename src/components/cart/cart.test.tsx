@@ -31,5 +31,19 @@ describe("Cart", () => {
     getByText("R$10");
     getByText("2");
     getByText("Total: R$20");
+    getByText(/ir para o check out/i);
+  });
+
+  it("should not show checkout message and should show an empty message if cart is empty", () => {
+    const { getByText, queryByText } = renderWithRedux(<Cart />, {
+      preloadedState: {
+        cartReducer: {
+          products: [],
+        },
+      } as any,
+    });
+
+    getByText(/seu carrinho está vázio!/i);
+    expect(queryByText(/ir para o check out/i)).toBeNull();
   });
 });
