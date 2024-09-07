@@ -70,4 +70,26 @@ describe("Cart", () => {
     userEvent.click(increaseButton);
     getByText("3");
   });
+  it("should decrease product quantity on increase click", () => {
+    const { getByLabelText, getByText } = renderWithRedux(<Cart />, {
+      preloadedState: {
+        cartReducer: {
+          products: [
+            {
+              id: "1",
+              imageUrl: "image_url",
+              name: "Boné",
+              price: 10,
+              quantity: 2,
+            },
+          ],
+        },
+      } as any,
+    });
+
+    const decreaseButton = getByLabelText(/decrease quantity of boné/i);
+
+    userEvent.click(decreaseButton);
+    getByText("1");
+  });
 });
