@@ -106,7 +106,7 @@ const SignUpPage = () => {
               })}
             />
             {errors?.password?.type === "required" && (
-              <InputErrorMessage>A nome é obrigatório</InputErrorMessage>
+              <InputErrorMessage>O nome é obrigatório</InputErrorMessage>
             )}
           </SignUpInputContainer>
           <SignUpInputContainer>
