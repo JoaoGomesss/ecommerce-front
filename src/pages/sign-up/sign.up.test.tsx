@@ -13,6 +13,7 @@ jest.mock("firebase/auth", () => ({
     EMAIL_EXISTS: "auth/email-already-in-use",
   },
 }));
+
 describe("Sign Up", () => {
   it("should show error when trying to submit without filling all required fields", async () => {
     const { getByText, findByText } = renderWithRedux(<SignUpPage />, {});
@@ -54,13 +55,13 @@ describe("Sign Up", () => {
       getByPlaceholderText(/confirme sua senha/i);
 
     userEvent.type(passwordInput, "123456");
-    userEvent.type(passwordConfirmationInput, "78");
+    userEvent.type(passwordConfirmationInput, "12345678");
 
     const submitButton = getByText("Criar sua conta", { selector: "button" });
 
     userEvent.click(submitButton);
 
-    // await findByText(/as senhas precisam ser iguais/i);
+    await findByText(/as senhas precisam ser iguais/i);
   });
 
   it("should show error when password has less than six characters", async () => {
@@ -70,14 +71,16 @@ describe("Sign Up", () => {
     );
 
     const passwordInput = getByPlaceholderText(/digite sua senha/i);
+    const passwordConfirmationInput =
+      getByPlaceholderText(/confirme sua senha/i);
 
     userEvent.type(passwordInput, "123");
-
+    userEvent.type(passwordConfirmationInput, "123");
     const submitButton = getByText("Criar sua conta", { selector: "button" });
 
     userEvent.click(submitButton);
 
-    // await findByText(/a senha precisa ter no mínimo 6 caracteres/i);
+    await findByText(/a senha precisa ter no mínimo 6 caracteres/i);
   });
 
   it("should show error if email already exists", async () => {
@@ -102,13 +105,13 @@ describe("Sign Up", () => {
     userEvent.type(nameInput, "Lorem");
     userEvent.type(lastNameInput, "Ipsum");
     userEvent.type(emailInput, "lorem@ipsum.com");
-    userEvent.type(passwordInput, "123467");
+    userEvent.type(passwordInput, "1234567");
     userEvent.type(passwordConfirmationInput, "1234567");
 
     const submitButton = getByText("Criar sua conta", { selector: "button" });
 
     userEvent.click(submitButton);
 
-    // await findByText(/este e-mail já está sendo utilizado/i);
+    await findByText(/este e-mail já está sendo utilizado/i);
   });
 });

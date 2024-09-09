@@ -192,7 +192,7 @@ const SignUpPage = () => {
             )}
             {errors?.password?.type === "minLength" && (
               <InputErrorMessage>
-                A senha precisa ter no mínimo 6 caracteres
+                A confirmação de senha precisa ter no mínimo 6 caracteres
               </InputErrorMessage>
             )}
           </SignUpInputContainer>
