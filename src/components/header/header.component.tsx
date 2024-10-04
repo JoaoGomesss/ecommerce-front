@@ -56,7 +56,7 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <HeaderTitle onClick={handleLogoClick}>KIDSVERSO</HeaderTitle>
+      <HeaderTitle onClick={handleLogoClick}>COSMO CLOTHING</HeaderTitle>
 
       <HeaderItems>
         <HeaderItem onClick={handleExploreClick}>Explorar</HeaderItem>
